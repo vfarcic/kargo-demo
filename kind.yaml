@@ -1,0 +1,15 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: kargo-quickstart
+nodes:
+- extraPortMappings:
+  - containerPort: 31443 # Argo CD dashboard
+    hostPort: 31443
+  - containerPort: 31444 # Kargo dashboard
+    hostPort: 31444
+  - containerPort: 30081 # test application instance
+    hostPort: 30081
+  - containerPort: 30082 # UAT application instance
+    hostPort: 30082
+  - containerPort: 30083 # prod application instance
+    hostPort: 30083
