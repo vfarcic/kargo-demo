@@ -1,0 +1,8 @@
+project: dot
+providers:
+  google_secretmanager:
+    env:
+      GITHUB_PAT:
+        path: projects/vfarcic/secrets/github-token/versions/2
+      GITHUB_USERNAME:
+        path: projects/vfarcic/secrets/github-user/versions/1

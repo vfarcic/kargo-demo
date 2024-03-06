@@ -5,11 +5,11 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      - stage: test
-      - stage: uat
-      - stage: prod
+    - list:
+        elements:
+          - stage: test
+          - stage: uat
+          - stage: prod
   template:
     metadata:
       name: kargo-demo-{{stage}}
@@ -18,7 +18,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: ${GITOPS_REPO_URL}
+        repoURL: https://github.com/vfarcic/kargo-demo
         targetRevision: stage/{{stage}}
         path: stages/{{stage}}
       destination:
@@ -26,4 +26,4 @@ spec:
         namespace: kargo-demo-{{stage}}
       syncPolicy:
         syncOptions:
-        - CreateNamespace=true
+          - CreateNamespace=true

@@ -3,17 +3,18 @@
     "kubectl@1.29.2",
     "kind@0.22.0",
     "kubernetes-helm@3.14.2",
-    "bat@0.24.0"
+    "bat@0.24.0",
+    "yq-go@4.42.1",
+    "teller@1.5.6"
   ],
   "shell": {
     "init_hook": [
-      "alias cat='bat --paging never --theme DarkNeon --style plain'"
+      "alias cat='bat --paging never --theme DarkNeon --style plain'",
+      "arch=$(uname -m)",
+      "[ \"$arch\" = \"x86_64\" ] && arch=amd64",
+      "curl -L -o kargo https://github.com/akuity/kargo/releases/latest/download/kargo-$(uname -s | tr '[:upper:]' '[:lower:]')-${arch}",
+      "chmod +x kargo"
     ],
-    "scripts": {
-      "youtube-release": [
-        "eval \"$(teller sh)\"",
-        "youtube-release"
-      ]
-    }
+    "scripts": {}
   }
 }

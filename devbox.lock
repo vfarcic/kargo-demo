@@ -80,6 +80,46 @@
           "store_path": "/nix/store/dcsaszcv7kyipc2l4r9qwpnk2j9kizq0-kubernetes-helm-3.14.2"
         }
       }
+    },
+    "teller@1.5.6": {
+      "last_modified": "2024-02-24T23:06:34Z",
+      "resolved": "github:NixOS/nixpkgs/9a9dae8f6319600fa9aebde37f340975cab4b8c0#teller",
+      "source": "devbox-search",
+      "version": "1.5.6",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/vb10d7vkpbls4bwc635ai9qgi65anc2c-teller-1.5.6"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/mxhfzid49ch80nr8mnc0rj5g0l3piqdd-teller-1.5.6"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/4zqvqf9xzgarffd9spfnp0r3yxdgvcjx-teller-1.5.6"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/d3kib0k2b4q5n4bqbbix5a33xb95bmyd-teller-1.5.6"
+        }
+      }
+    },
+    "yq-go@4.42.1": {
+      "last_modified": "2024-02-26T10:27:36Z",
+      "resolved": "github:NixOS/nixpkgs/fcea2b6260dd566c28c894b4207a5f2b56c2cba3#yq-go",
+      "source": "devbox-search",
+      "version": "4.42.1",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/xvql00vz4789b5kfixpf00yip6cr48jg-yq-go-4.42.1"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/d7am4v6crlivll33ha62jkxrvskhxy6q-yq-go-4.42.1"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/55pf8blyjr735lnbnfi02dg3ps4azv66-yq-go-4.42.1"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/a2d218n3aw5464803fls3ssabj8229f9-yq-go-4.42.1"
+        }
+      }
     }
   }
 }
