@@ -3,6 +3,6 @@ providers:
   google_secretmanager:
     env:
       GITHUB_PAT:
-        path: projects/vfarcic/secrets/github-token/versions/2
+        path: projects/vfarcic/secrets/github-token/versions/4
       GITHUB_USERNAME:
         path: projects/vfarcic/secrets/github-user/versions/1
