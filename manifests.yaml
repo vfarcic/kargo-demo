@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kargo-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kargo-demo
+  template:
+    metadata:
+      labels:
+        app: kargo-demo
+    spec:
+      containers:
+      - image: public.ecr.aws/nginx/nginx:1.27.2
+        name: nginx
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: content
+          readOnly: true
+      volumes:
+      - configMap:
+          name: kargo-demo-content
+        name: content
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kargo-demo
+spec:
+  ports:
+  - nodePort: 30081
+    port: 3000
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: kargo-demo
+  type: NodePort
+---
+apiVersion: v1
+data:
+  index.html: |-
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>test</title>
+    </head>
+    <body>
+
+    <h1>test</h1>
+
+    </body>
+    </html>
+kind: ConfigMap
+metadata:
+  name: kargo-demo-content
