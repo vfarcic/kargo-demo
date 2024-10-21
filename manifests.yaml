@@ -13,7 +13,7 @@ spec:
         app: kargo-demo
     spec:
       containers:
-      - image: public.ecr.aws/nginx/nginx:placeholder
+      - image: ghcr.io/vfarcic/silly-demo:placeholder
         name: nginx
         volumeMounts:
         - mountPath: /usr/share/nginx/html
