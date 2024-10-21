@@ -1,57 +1,72 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: kargo-demo
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+  labels:
+    app.kubernetes.io/name: silly-demo
+  name: silly-demo
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: kargo-demo
-  template:
-    metadata:
-      labels:
-        app: kargo-demo
-    spec:
-      containers:
-      - image: ghcr.io/vfarcic/silly-demo:1.4.298
-        name: nginx
-        volumeMounts:
-        - mountPath: /usr/share/nginx/html
-          name: content
-          readOnly: true
-      volumes:
-      - configMap:
-          name: kargo-demo-content
-        name: content
+  rules:
+  - host: silly-demo.127.0.0.1.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: silly-demo
+            port:
+              number: 8080
+        path: /
+        pathType: ImplementationSpecific
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: kargo-demo
+  labels:
+    app.kubernetes.io/name: silly-demo
+  name: silly-demo
 spec:
   ports:
-  - nodePort: 30081
-    port: 3000
+  - name: http
+    port: 8080
     protocol: TCP
-    targetPort: 80
+    targetPort: 8080
   selector:
-    app: kargo-demo
-  type: NodePort
+    app.kubernetes.io/name: silly-demo
+  type: ClusterIP
 ---
-apiVersion: v1
-data:
-  index.html: |-
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>test</title>
-    </head>
-    <body>
-
-    <h1>test</h1>
-
-    </body>
-    </html>
-kind: ConfigMap
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: kargo-demo-content
+  labels:
+    app.kubernetes.io/name: silly-demo
+  name: silly-demo
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: silly-demo
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: silly-demo
+    spec:
+      containers:
+      - image: ghcr.io/vfarcic/silly-demo:1.4.298
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        name: silly-demo
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 250m
+            memory: 256Mi
